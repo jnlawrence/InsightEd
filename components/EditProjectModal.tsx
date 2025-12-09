@@ -105,9 +105,29 @@ const EditProjectModal: React.FC<EditProjectModalProps> = ({ project, isOpen, on
 
            {/* Dates */}
            <div className="lg:col-span-3 pb-2 border-b border-slate-100 mt-4 mb-2">
-            <h3 className="text-sm font-semibold text-blue-600 uppercase tracking-wide">Timelines</h3>
+            <h3 className="text-sm font-semibold text-blue-600 uppercase tracking-wide">Timelines (Procurement & Construction)</h3>
           </div>
 
+          <div>
+             <label className="block text-sm font-medium text-slate-700 mb-1">Invitation to Bid</label>
+             <input type="date" name="invitationToBid" value={formData.invitationToBid || ''} onChange={handleChange} className="w-full border rounded px-3 py-2 text-sm" />
+          </div>
+          <div>
+             <label className="block text-sm font-medium text-slate-700 mb-1">Pre-Submission Conf.</label>
+             <input type="date" name="preSubmissionConference" value={formData.preSubmissionConference || ''} onChange={handleChange} className="w-full border rounded px-3 py-2 text-sm" />
+          </div>
+          <div>
+             <label className="block text-sm font-medium text-slate-700 mb-1">Bid Opening</label>
+             <input type="date" name="bidOpening" value={formData.bidOpening || ''} onChange={handleChange} className="w-full border rounded px-3 py-2 text-sm" />
+          </div>
+          <div>
+             <label className="block text-sm font-medium text-slate-700 mb-1">Resolution to Award</label>
+             <input type="date" name="resolutionToAward" value={formData.resolutionToAward || ''} onChange={handleChange} className="w-full border rounded px-3 py-2 text-sm" />
+          </div>
+           <div>
+             <label className="block text-sm font-medium text-slate-700 mb-1">Notice To Proceed</label>
+             <input type="date" name="noticeToProceed" value={formData.noticeToProceed || ''} onChange={handleChange} className="w-full border rounded px-3 py-2 text-sm" />
+          </div>
           <div>
              <label className="block text-sm font-medium text-slate-700 mb-1">Target Completion</label>
              <input type="date" name="targetCompletionDate" value={formData.targetCompletionDate} onChange={handleChange} className="w-full border rounded px-3 py-2 text-sm" />
@@ -116,10 +136,7 @@ const EditProjectModal: React.FC<EditProjectModalProps> = ({ project, isOpen, on
              <label className="block text-sm font-medium text-slate-700 mb-1">Actual Completion</label>
              <input type="date" name="actualCompletionDate" value={formData.actualCompletionDate || ''} onChange={handleChange} className="w-full border rounded px-3 py-2 text-sm" />
           </div>
-           <div>
-             <label className="block text-sm font-medium text-slate-700 mb-1">Notice To Proceed</label>
-             <input type="date" name="noticeToProceed" value={formData.noticeToProceed || ''} onChange={handleChange} className="w-full border rounded px-3 py-2 text-sm" />
-          </div>
+          
 
           {/* Financials & Contractor */}
           <div className="lg:col-span-3 pb-2 border-b border-slate-100 mt-4 mb-2">
