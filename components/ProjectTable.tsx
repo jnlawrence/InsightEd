@@ -5,9 +5,10 @@ interface ProjectTableProps {
   projects: Project[];
   onEdit: (project: Project) => void;
   onAnalyze: (project: Project) => void;
+  onRealign: (project: Project) => void;
 }
 
-const ProjectTable: React.FC<ProjectTableProps> = ({ projects, onEdit, onAnalyze }) => {
+const ProjectTable: React.FC<ProjectTableProps> = ({ projects, onEdit, onAnalyze, onRealign }) => {
   const getStatusColor = (status: ProjectStatus) => {
     switch (status) {
       case ProjectStatus.Completed: return 'bg-emerald-100 text-emerald-800 border-emerald-200';
@@ -22,23 +23,6 @@ const ProjectTable: React.FC<ProjectTableProps> = ({ projects, onEdit, onAnalyze
   const formatCurrency = (amount: number) => {
     return new Intl.NumberFormat('en-PH', { style: 'currency', currency: 'PHP' }).format(amount);
   };
-
-  // Define column structure for cleaner rendering
-  const columns = [
-    { header: 'Project Details', width: 'min-w-[250px]', fixed: true },
-    { header: 'Location', width: 'min-w-[200px]' },
-    { header: 'Status', width: 'min-w-[150px]' },
-    { header: 'Accomplishment', width: 'min-w-[150px]' },
-    { header: 'Allocation', width: 'min-w-[150px]' },
-    { header: 'Contractor', width: 'min-w-[200px]' },
-    { header: 'Target Date', width: 'min-w-[120px]' },
-    { header: 'Actual Date', width: 'min-w-[120px]' },
-    { header: 'Remarks', width: 'min-w-[200px]' },
-    { header: 'Batch', width: 'min-w-[100px]' },
-    { header: 'IDs', width: 'min-w-[150px]' },
-    { header: 'Procurement Dates', width: 'min-w-[250px]' },
-    { header: 'Actions', width: 'min-w-[150px]', right: true }
-  ];
 
   return (
     <div className="bg-white rounded-xl shadow border border-slate-200 flex flex-col h-[600px] overflow-hidden">
@@ -58,7 +42,7 @@ const ProjectTable: React.FC<ProjectTableProps> = ({ projects, onEdit, onAnalyze
               <th className="p-4 border-b border-slate-200 min-w-[250px]">Procurement Details</th>
               
               {/* Sticky Right Column */}
-              <th className="sticky right-0 bg-slate-50 z-30 p-4 border-b border-l border-slate-200 min-w-[140px] text-center">Actions</th>
+              <th className="sticky right-0 bg-slate-50 z-30 p-4 border-b border-l border-slate-200 min-w-[120px] text-center">Actions</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-slate-100 text-sm text-slate-700">
@@ -132,6 +116,7 @@ const ProjectTable: React.FC<ProjectTableProps> = ({ projects, onEdit, onAnalyze
                   >
                     Update
                   </button>
+                  
                   <button 
                     onClick={() => onAnalyze(project)}
                     className="w-full px-3 py-1.5 bg-white border border-purple-200 text-purple-600 text-xs font-medium rounded hover:bg-purple-50 transition flex items-center justify-center gap-1"
@@ -146,7 +131,7 @@ const ProjectTable: React.FC<ProjectTableProps> = ({ projects, onEdit, onAnalyze
             ))}
             {projects.length === 0 && (
                 <tr>
-                    <td colSpan={10} className="p-8 text-center text-slate-500">
+                    <td colSpan={9} className="p-8 text-center text-slate-500">
                         No projects found.
                     </td>
                 </tr>

@@ -6,6 +6,13 @@ export enum ProjectStatus {
   Completed = "Completed"
 }
 
+export interface ProjectCoordinates {
+  lat: number;
+  lng: number;
+  accuracy: number;
+  timestamp: number;
+}
+
 export interface Project {
   id: string; // Internal ID for React keys
   region: string;
@@ -31,6 +38,12 @@ export interface Project {
   statusAsOfDate: string; // ISO Date
   accomplishmentPercentage: number;
   status: ProjectStatus;
+  
+  // New Fields
+  coordinates?: ProjectCoordinates;
+  photos?: string[];
+  documents?: string[];
+  certificateUrl?: string;
 }
 
 export interface DashboardStats {

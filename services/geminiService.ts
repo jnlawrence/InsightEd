@@ -64,3 +64,44 @@ export const generateSmartRemarks = async (project: Project): Promise<string> =>
         return "";
     }
 }
+
+export const generateRegionalReport = async (region: string, projects: Project[]): Promise<string> => {
+  try {
+    const ai = getClient();
+    const model = 'gemini-2.5-flash';
+    
+    // Prepare a simplified data set for the prompt to save tokens
+    const projectSummaries = projects.map(p => ({
+      name: p.schoolName,
+      status: p.status,
+      progress: p.accomplishmentPercentage,
+      allocation: p.projectAllocation,
+      targetDate: p.targetCompletionDate
+    }));
+
+    const prompt = `
+      Act as a Regional Infrastructure Manager. Generate a formal Executive Summary Report for **${region}**.
+      
+      Data Provided:
+      ${JSON.stringify(projectSummaries)}
+      
+      Report Structure:
+      1. **Executive Overview**: Total projects, total budget (sum allocation), and general progress sentiment.
+      2. **Status Breakdown**: Count of projects by status (Completed, Ongoing, Delayed).
+      3. **Critical Attention Required**: Identify specific schools with low progress (<20%) or that are delayed past target date.
+      4. **Recommendations**: 2-3 strategic actions to improve implementation in this region.
+      
+      Format: Use Markdown. Be professional, concise, and data-driven.
+    `;
+
+    const response = await ai.models.generateContent({
+      model: model,
+      contents: prompt,
+    });
+
+    return response.text || "Could not generate report.";
+  } catch (error) {
+    console.error("Error generating report:", error);
+    return "Unable to generate report at this time. Please check your API key.";
+  }
+};

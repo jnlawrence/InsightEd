@@ -1,5 +1,7 @@
 {
   "name": "InsightEd: School Construction Monitoring",
   "description": "A comprehensive dashboard for monitoring school infrastructure projects, tracking status, funds, and completion timelines with AI-powered risk assessment.",
-  "requestFramePermissions": []
+  "requestFramePermissions": [
+    "geolocation"
+  ]
 }
